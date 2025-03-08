@@ -6,7 +6,6 @@ using Photon.Pun;
 using System;
 using System.Diagnostics;
 using UnityEngine;
-using Utilla;
 
 namespace GroundZ3R0s_Camera_Mod
 {
@@ -14,7 +13,6 @@ namespace GroundZ3R0s_Camera_Mod
     /// This is your mod's main class.
     /// </summary>
 
-    [BepInDependency("org.legoandmars.gorillatag.utilla", "1.5.0")]
     [BepInPlugin(PluginInfo.GUID, PluginInfo.Name, PluginInfo.Version)]
     public class Plugin : BaseUnityPlugin
     {
@@ -32,36 +30,15 @@ namespace GroundZ3R0s_Camera_Mod
         GameObject ThirdPersonCameraGO = null;
         float FOVSLIDER = 60f;
 
-        void Start()
-        {
-            /* A lot of Gorilla Tag systems will not be set up when start is called /*
-			/* Put code in OnGameInitialized to avoid null references */
-
-            Utilla.Events.GameInitialized += OnGameInitialized;
-        }
-
         void OnEnable()
         {
-            /* Set up your mod here */
-            /* Code here runs at the start and whenever your mod is enabled*/
-
             HarmonyPatches.ApplyHarmonyPatches();
         }
 
         void OnDisable()
         {
-            /* Undo mod setup here */
-            /* This provides support for toggling mods with ComputerInterface, please implement it :) */
-            /* Code here runs whenever your mod is disabled (including if it disabled on startup)*/
-
             HarmonyPatches.RemoveHarmonyPatches();
         }
-
-        void OnGameInitialized(object sender, EventArgs e)
-        {
-
-        }
-
         void __CameraInit__()
         {
             Camera = ObjLIB.CreateObj("GroundZ3R0's Camera", PrimitiveType.Cube, "GorillaTag/UberShader", false, cameraSize, cameraPos, new Color(125f, 75f, 125f));
